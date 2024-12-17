@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd React-Crud 
+          cd React_Crudd 
           npm install
 
       - name: Run SonarCloud Scan
