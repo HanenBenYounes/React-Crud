@@ -1,0 +1,32 @@
+
+
+name: CI/CD with SonarCloud and Deployment
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le pipeline sur chaque push sur la branche 'main'
+
+jobs:
+  build-test-sonarcloud:
+    runs-on: ubuntu-latest  # Utilise une machine virtuelle Ubuntu pour l'exécution
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3  # Vérifie le code depuis le dépôt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Installe Node.js version 16
+
+      - name: Install dependencies
+        run: npm install  # Installe les dépendances du projet
+
+      - name: Run SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v2  # Utilise l'action officielle de SonarCloud
+        with:
+          organization: Test-react-crudd  # Remplacez par le nom de votre organisation SonarCloud
+          projectKey: HanenBenYounes_React_Crudd    # Remplacez par la clé de votre projet SonarCloud
+          token: ${{ secrets.SONAR_TOKEN }}  # Utilise le token secret GitHub
+
